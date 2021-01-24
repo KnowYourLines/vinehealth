@@ -1,5 +1,7 @@
 from flask import request, Blueprint
 
+from project.models import Licence
+
 bp = Blueprint("licence", __name__)
 
 
@@ -26,3 +28,9 @@ def licence():
     licence_number = (
         digit_1_5 + digit_6 + digit_7_8 + digit_9_10 + digit_11 + digit_12 + digit_13
     )
+
+
+@bp.route("/licences", methods=["GET"])
+def licences():
+    all_licences = Licence.query.all()
+    return all_licences

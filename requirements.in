@@ -2,5 +2,5 @@ Flask
 pytest
 black
 pip-tools
-flask_sqlalchemy
+flask-sqlalchemy
 psycopg2-binary>=2.8
