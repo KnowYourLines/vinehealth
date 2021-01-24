@@ -1,9 +1,9 @@
-from flask import Flask, request
+from flask import request, Blueprint
 
-app = Flask(__name__)
+bp = Blueprint("licence", __name__)
 
 
-@app.route("/licence", methods=["POST"])
+@bp.route("/licence", methods=["POST"])
 def licence():
     payload = request.data
 
