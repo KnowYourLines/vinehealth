@@ -1,7 +1,7 @@
 from flask import request, Blueprint, Response
 
 from project.models import Licence
-from project.serializers import licences_schema
+from project.serializers import LicenceSchema
 
 bp = Blueprint("licence", __name__)
 
@@ -34,4 +34,5 @@ def licence():
 @bp.route("/licences", methods=["GET"])
 def licences():
     all_licences = Licence.query.all()
-    return Response(licences_schema.dump(all_licences))
+    result = LicenceSchema(many=True).dump(all_licences)
+    return Response(result)

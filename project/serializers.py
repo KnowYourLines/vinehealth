@@ -6,6 +6,3 @@ class LicenceSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Licence
         fields = ("licence",)
-
-
-licences_schema = LicenceSchema(many=True)
