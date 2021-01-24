@@ -9,7 +9,7 @@ class LicenceSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Licence
         fields = (
-            "licence",
+            "licence_number",
             "first_name",
             "middle_name",
             "last_name",
@@ -22,9 +22,9 @@ class LicenceSchema(ma.SQLAlchemySchema):
     last_name = fields.String(load_only=True, required=True)
     date_of_birth = fields.Date(load_only=True, required=True)
     gender = fields.String(validate=OneOf(["M", "F"]), load_only=True, required=True)
-    licence = fields.Method("make_licence", dump_only=True)
+    licence_number = fields.Method("make_licence_number", dump_only=True)
 
-    def make_licence(self, data):
+    def make_licence_number(self, data):
         last_name = data.last_name
         digit_1_5 = last_name[:6]
         digit_1_5 = digit_1_5 + "".join("9" for _ in range(5 - len(digit_1_5)))
