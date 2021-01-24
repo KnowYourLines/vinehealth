@@ -1,4 +1,4 @@
-from marshmallow import fields
+from marshmallow import fields, post_dump
 from marshmallow.validate import OneOf
 
 from project import ma
@@ -23,6 +23,10 @@ class LicenceSchema(ma.SQLAlchemySchema):
     date_of_birth = fields.Date(load_only=True, required=True)
     gender = fields.String(validate=OneOf(["M", "F"]), load_only=True, required=True)
     licence_number = fields.Method("make_licence_number", dump_only=True, required=True)
+
+    @post_dump
+    def extract_licence_number(self, data, **kwargs):
+        return data["licence_number"]
 
     def make_licence_number(self, data):
         last_name = data.last_name
