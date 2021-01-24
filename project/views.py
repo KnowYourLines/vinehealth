@@ -1,4 +1,4 @@
-from flask import request, Blueprint, Response, jsonify
+from flask import request, Blueprint, jsonify
 
 from project import db
 from project.models import Licence
@@ -13,8 +13,9 @@ def licence():
     new_licence = Licence(**input)
     db.session.add(new_licence)
     db.session.commit()
-    print(new_licence)
-    return Response()
+    new_licence_number = Licence.query.filter_by(id=new_licence.id).one()
+    result = LicenceSchema().dump(new_licence_number)
+    return jsonify(result)
 
 
 @bp.route("/licences", methods=["GET"])

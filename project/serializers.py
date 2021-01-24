@@ -22,7 +22,7 @@ class LicenceSchema(ma.SQLAlchemySchema):
     last_name = fields.String(load_only=True, required=True)
     date_of_birth = fields.Date(load_only=True, required=True)
     gender = fields.String(validate=OneOf(["M", "F"]), load_only=True, required=True)
-    licence_number = fields.Method("make_licence_number", dump_only=True)
+    licence_number = fields.Method("make_licence_number", dump_only=True, required=True)
 
     def make_licence_number(self, data):
         last_name = data.last_name
