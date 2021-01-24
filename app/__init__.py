@@ -1,30 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from app import licence
+from app import views
 from app.config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.register_blueprint(licence.bp)
+app.register_blueprint(views.bp)
 
 db = SQLAlchemy(app)
 
+from app import models
 
-class Licence(db.Model):
-    __tablename__ = "licences"
-    id = db.Column(db.Integer, primary_key=True)
-    licence = db.Column(db.String(13), unique=False)
-
-    def __init__(self, licence=None):
-        self.licence = licence
-
-    def __repr__(self):
-        return "<Licence %r>" % (self.licence)
-
-
-@app.cli.command("create-db")
-def create_db():
-    db.drop_all()
-    db.create_all()
-    db.session.commit()
+db.create_all()
+db.session.commit()
