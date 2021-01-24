@@ -2,12 +2,10 @@ from project import db
 
 
 class Licence(db.Model):
-    __tablename__ = "licences"
+    __tablename__ = "drivers"
     id = db.Column(db.Integer, primary_key=True)
-    licence = db.Column(db.String(13), unique=False)
-
-    def __init__(self, licence=None):
-        self.licence = licence
-
-    def __repr__(self):
-        return "<Licence %r>" % (self.licence)
+    last_name = db.Column(db.String(), unique=False)
+    first_name = db.Column(db.String(), unique=False)
+    middle_name = db.Column(db.String(), unique=False)
+    date_of_birth = db.Column(db.Date(), unique=False)
+    gender = db.Column(db.String(1), unique=False)
