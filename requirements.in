@@ -2,5 +2,7 @@ Flask
 pytest
 black
 pip-tools
+flask-marshmallow
 flask-sqlalchemy
+marshmallow-sqlalchemy
 psycopg2-binary>=2.8
