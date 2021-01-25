@@ -1,4 +1,4 @@
-from marshmallow import fields, post_dump
+from marshmallow import fields, post_dump, post_load
 from marshmallow.validate import OneOf
 
 from project import ma
@@ -22,16 +22,20 @@ class DriverSchema(ma.SQLAlchemySchema):
     last_name = fields.String(load_only=True, required=True)
     date_of_birth = fields.Date(load_only=True, required=True)
     gender = fields.String(validate=OneOf(["M", "F"]), load_only=True, required=True)
-    licence_number = fields.Method("make_licence_number", dump_only=True, required=True)
+    licence_number = fields.String(dump_only=True, required=True)
 
     @post_dump
     def extract_licence_number(self, data, **kwargs):
         return data["licence_number"]
 
+    @post_load
+    def process_input(self, data, **kwargs):
+        return {"licence_number": self.make_licence_number(data)}
+
     def make_licence_number(self, data):
-        last_name = data.last_name
-        date_of_birth = data.date_of_birth.isoformat()
-        gender = data.gender
+        last_name = data["last_name"]
+        date_of_birth = data["date_of_birth"].isoformat()
+        gender = data["gender"]
         month_of_birth = int(date_of_birth.split("-")[1])
         year_of_birth = date_of_birth.split("-")[0]
         day_of_month_of_birth = date_of_birth.split("-")[2][:2]
@@ -45,8 +49,8 @@ class DriverSchema(ma.SQLAlchemySchema):
         digit_7_8 = f"{month_of_birth:02}"
         digit_9_10 = day_of_month_of_birth
         digit_11 = year_of_birth[3]
-        digit_12 = data.first_name[0]
-        digit_13 = data.middle_name[0] or "9"
+        digit_12 = data["first_name"][0]
+        digit_13 = data["middle_name"][0] or "9"
         licence_number = (
             digit_1_5
             + digit_6
