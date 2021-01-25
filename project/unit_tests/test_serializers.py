@@ -8,7 +8,7 @@ from project.models import Driver
 from project.serializers import DriverSchema
 
 
-class LicenceSchemaTest(unittest.TestCase):
+class DriverSchemaTest(unittest.TestCase):
     def test_extracts_licence_number_correctly(self):
         data = {
             "last_name": "a",
