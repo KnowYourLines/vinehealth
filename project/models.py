@@ -9,4 +9,3 @@ class Driver(db.Model):
     middle_name = db.Column(db.String(), unique=False)
     date_of_birth = db.Column(db.Date(), unique=False)
     gender = db.Column(db.String(1), unique=False)
-    licence_number = db.Column(db.String(13), unique=False)
