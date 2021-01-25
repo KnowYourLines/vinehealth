@@ -2,12 +2,12 @@ import datetime
 import json
 
 from project import app, db
-from project.models import Licence
+from project.models import Driver
 
 
 def test_retrieves_all_licence_numbers():
     with app.test_client() as client:
-        new_licence = Licence(
+        new_licence = Driver(
             **{
                 "last_name": "a",
                 "first_name": "b",
@@ -18,7 +18,7 @@ def test_retrieves_all_licence_numbers():
         )
         db.session.add(new_licence)
         db.session.flush()
-        new_licence = Licence(
+        new_licence = Driver(
             **{
                 "last_name": "a",
                 "first_name": "b",

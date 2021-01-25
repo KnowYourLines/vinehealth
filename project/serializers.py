@@ -2,12 +2,12 @@ from marshmallow import fields, post_dump
 from marshmallow.validate import OneOf
 
 from project import ma
-from project.models import Licence
+from project.models import Driver
 
 
-class LicenceSchema(ma.SQLAlchemySchema):
+class DriverSchema(ma.SQLAlchemySchema):
     class Meta:
-        model = Licence
+        model = Driver
         fields = (
             "licence_number",
             "first_name",

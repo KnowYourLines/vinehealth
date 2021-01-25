@@ -1,7 +1,7 @@
 from project import db
 
 
-class Licence(db.Model):
+class Driver(db.Model):
     __tablename__ = "drivers"
     id = db.Column(db.Integer, primary_key=True)
     last_name = db.Column(db.String(), unique=False)
