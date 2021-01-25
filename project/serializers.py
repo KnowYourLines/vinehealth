@@ -25,7 +25,7 @@ class DriverSchema(ma.SQLAlchemySchema):
     licence_number = fields.String(dump_only=True, required=True)
 
     @post_dump
-    def extract_licence_number(self, data, **kwargs):
+    def process_output(self, data, **kwargs):
         return data["licence_number"]
 
     @post_load
