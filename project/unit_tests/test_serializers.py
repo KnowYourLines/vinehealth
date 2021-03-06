@@ -46,7 +46,7 @@ class DriverSchemaTest(unittest.TestCase):
         }
         data = json.dumps(data)
         input = DriverSchema().loads(data)
-        assert input == {"licence_number": "aa999914099bc"}
+        assert input == {"licence_number": "aa999959099bc"}
 
     def test_fails_to_deserialize_invalid_data(self):
         data = {
